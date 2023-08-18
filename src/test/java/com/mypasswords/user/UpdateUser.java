@@ -26,13 +26,15 @@ public class UpdateUser {
 
     @Test
     public void updateUserSuccessfully() throws IOException {
-        jsonService.updateUser(userId, "updateEmail@email.com", "updateUsername");
+        String updatedEmail = faker.generateEmail();
+        String updatedUsername = faker.generateName();
+        jsonService.updateUser(userId, updatedEmail, updatedUsername);
         File payload = new File("src/test/resources/payloads/user/updateUser.json");
         httpClient.put(payload, "/user")
                 .statusCode(200)
                 .body("data.id", is(userId))
-                .body("data.email", is("updateEmail@email.com"))
-                .body("data.username", is("updateUsername"));
+                .body("data.email", is(updatedEmail))
+                .body("data.username", is(updatedUsername));
     }
 
     @Test
@@ -52,6 +54,4 @@ public class UpdateUser {
                 .statusCode(400)
                 .body("message", is("ID inválido ou inexistente."));
     }
-
-
 }

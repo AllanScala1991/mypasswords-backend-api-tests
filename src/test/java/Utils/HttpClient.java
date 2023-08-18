@@ -28,4 +28,14 @@ public class HttpClient {
                 .put(endpoint)
                 .then();
     }
+
+    public ValidatableResponse delete(String endpoint) {
+        baseURI = config.getBaseUrl();
+
+        return given()
+                .contentType("application/json")
+                .when()
+                .delete(endpoint)
+                .then();
+    }
 }
