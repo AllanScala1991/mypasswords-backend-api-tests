@@ -19,4 +19,13 @@ public class JsonService {
         ((ObjectNode) rootNode).put("username", username);
         objectMapper.writeValue(file, rootNode);
     }
+
+    public void updateUser(String id, String email, String username) throws IOException {
+        File file = new File("src/test/resources/payloads/user/updateUser.json");
+        JsonNode rootNode = objectMapper.readTree(file);
+        ((ObjectNode) rootNode).put("id", id);
+        ((ObjectNode) rootNode).put("email", email);
+        ((ObjectNode) rootNode).put("username", username);
+        objectMapper.writeValue(file, rootNode);
+    }
 }

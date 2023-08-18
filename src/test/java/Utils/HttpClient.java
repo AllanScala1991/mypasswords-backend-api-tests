@@ -17,4 +17,15 @@ public class HttpClient {
                 .post(endpoint)
                 .then();
     }
+
+    public ValidatableResponse put(File payload, String endpoint) {
+        baseURI = config.getBaseUrl();
+
+        return given()
+                .contentType("application/json")
+                .body(payload)
+                .when()
+                .put(endpoint)
+                .then();
+    }
 }
