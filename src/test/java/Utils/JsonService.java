@@ -28,4 +28,12 @@ public class JsonService {
         ((ObjectNode) rootNode).put("username", username);
         objectMapper.writeValue(file, rootNode);
     }
+
+    public void login(String username, String password) throws IOException {
+        File file = new File("src/test/resources/payloads/login/login.json");
+        JsonNode rootNode = objectMapper.readTree(file);
+        ((ObjectNode) rootNode).put("username", username);
+        ((ObjectNode) rootNode).put("password", password);
+        objectMapper.writeValue(file, rootNode);
+    }
 }
