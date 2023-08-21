@@ -24,14 +24,14 @@ public class DeleteUser {
     @Test
     public void deleteUserSuccessfully() {
         System.out.println(userId);
-        httpClient.delete("/user/" + userId)
+        httpClient.delete("/user/" + userId, "")
                 .statusCode(200)
                 .body("message", is("Usuário deletado com sucesso."));
     }
 
     @Test
     public void sendInvalidUserId() {
-        httpClient.delete("/user/" + UUID.randomUUID().toString())
+        httpClient.delete("/user/" + UUID.randomUUID().toString(), "")
                 .statusCode(400)
                 .body("message", is("Usuário não localizado."));
     }

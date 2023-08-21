@@ -20,22 +20,24 @@ public class HttpClient {
                 .then();
     }
 
-    public ValidatableResponse put(File payload, String endpoint) {
+    public ValidatableResponse put(File payload, String endpoint, String token) {
         baseURI = config.getBaseUrl();
 
         return given()
                 .contentType("application/json")
+                .header("Authorization", "Bearer " + token)
                 .body(payload)
                 .when()
                 .put(endpoint)
                 .then();
     }
 
-    public ValidatableResponse delete(String endpoint) {
+    public ValidatableResponse delete(String endpoint, String token) {
         baseURI = config.getBaseUrl();
 
         return given()
                 .contentType("application/json")
+                .header("Authorization", "Bearer " + token)
                 .when()
                 .delete(endpoint)
                 .then();

@@ -43,4 +43,12 @@ public class JsonService {
         ((ObjectNode) rootNode).put("userId", userId);
         objectMapper.writeValue(file, rootNode);
     }
+
+    public void updatePassword(String passwordId, String userId) throws IOException {
+        File file = new File("src/test/resources/payloads/password/UpdatePassword.json");
+        JsonNode rootNode = objectMapper.readTree(file);
+        ((ObjectNode) rootNode).put("id", passwordId);
+        ((ObjectNode) rootNode).put("userId", userId);
+        objectMapper.writeValue(file, rootNode);
+    }
 }

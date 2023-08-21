@@ -30,7 +30,7 @@ public class UpdateUser {
         String updatedUsername = faker.generateName();
         jsonService.updateUser(userId, updatedEmail, updatedUsername);
         File payload = new File("src/test/resources/payloads/user/updateUser.json");
-        httpClient.put(payload, "/user")
+        httpClient.put(payload, "/user", "")
                 .statusCode(200)
                 .body("data.id", is(userId))
                 .body("data.email", is(updatedEmail))
@@ -41,7 +41,7 @@ public class UpdateUser {
     public void sendInvalidUserId() throws IOException {
         jsonService.updateUser(UUID.randomUUID().toString(), "updateEmail@email.com", "updateUsername");
         File payload = new File("src/test/resources/payloads/user/updateUser.json");
-        httpClient.put(payload, "/user")
+        httpClient.put(payload, "/user", "")
                 .statusCode(400)
                 .body("message", is("Usuário não localizado."));
     }
@@ -50,7 +50,7 @@ public class UpdateUser {
     public void sendEmptyId() throws  IOException {
         jsonService.updateUser("", "updateEmail@email.com", "updateUsername");
         File payload = new File("src/test/resources/payloads/user/updateUser.json");
-        httpClient.put(payload, "/user")
+        httpClient.put(payload, "/user", "")
                 .statusCode(400)
                 .body("message", is("ID inválido ou inexistente."));
     }

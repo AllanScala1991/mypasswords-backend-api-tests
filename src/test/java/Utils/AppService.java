@@ -28,9 +28,15 @@ public class AppService {
                 .statusCode(201);
     }
 
-    public String getProposalTitle(String userId, String token) {
+    public String getPasswordTitle(String userId, String token) {
         return httpClient.get("/password/user/" + userId, token)
                 .statusCode(200)
                 .extract().path("data[0].title");
+    }
+
+    public String getPasswordId(String userId, String token) {
+        return httpClient.get("/password/user/" + userId, token)
+                .statusCode(200)
+                .extract().path("data[0].id");
     }
 }

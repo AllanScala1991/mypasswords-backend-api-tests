@@ -28,11 +28,11 @@ public class GetPasswordByTitle {
 
     @Test
     public void getPasswordByTitle() {
-        String proposalTitle = appService.getProposalTitle(userId, token);
+        String passwordTitle = appService.getPasswordTitle(userId, token);
 
-        httpClient.get("/password/" + proposalTitle, token)
+        httpClient.get("/password/" + passwordTitle, token)
                 .statusCode(200)
-                .body("data[0].title", is(proposalTitle));
+                .body("data[0].title", is(passwordTitle));
     }
 
     @Test
@@ -44,9 +44,9 @@ public class GetPasswordByTitle {
 
     @Test
     public void sendInvalidToken() {
-        String proposalTitle = appService.getProposalTitle(userId, token);
+        String passwordTitle = appService.getPasswordTitle(userId, token);
 
-        httpClient.get("/password/" + proposalTitle, "invalid")
+        httpClient.get("/password/" + passwordTitle, "invalid")
                 .statusCode(403);
     }
 }
