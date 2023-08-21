@@ -40,4 +40,15 @@ public class HttpClient {
                 .delete(endpoint)
                 .then();
     }
+
+    public ValidatableResponse get(String endpoint, String token) {
+        baseURI = config.getBaseUrl();
+
+        return given()
+                .contentType("application/json")
+                .header("Authorization", "Bearer " + token)
+                .when()
+                .get(endpoint)
+                .then();
+    }
 }
