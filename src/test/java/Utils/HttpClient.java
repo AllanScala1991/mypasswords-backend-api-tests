@@ -4,14 +4,16 @@ import io.restassured.response.ValidatableResponse;
 import static io.restassured.RestAssured.*;
 
 import java.io.File;
+import java.util.Optional;
 
 public class HttpClient {
     private final Configuration config = new Configuration();
-    public ValidatableResponse post(File payload, String endpoint) {
+    public ValidatableResponse post(File payload, String endpoint, String token) {
         baseURI = config.getBaseUrl();
 
         return  given()
                 .contentType("application/json")
+                .header("Authorization", "Bearer " + token)
                 .body(payload)
                 .when()
                 .post(endpoint)

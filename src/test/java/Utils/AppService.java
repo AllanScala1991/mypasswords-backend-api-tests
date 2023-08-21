@@ -9,8 +9,16 @@ public class AppService {
     public String createUser(String name, String email, String username) throws IOException {
         jsonService.createUser(name, email, username);
         File payload = new File("src/test/resources/payloads/user/createUser.json");
-        return httpClient.post(payload, "/user")
+        return httpClient.post(payload, "/user", "")
                 .statusCode(201)
                 .extract().path("data.id");
+    }
+
+    public String getToken(String username, String password) throws IOException {
+        jsonService.login(username, password);
+        File payload = new File("src/test/resources/payloads/login/login.json");
+        return httpClient.post(payload, "/login", "")
+                .statusCode(200)
+                .extract().path("data.token");
     }
 }

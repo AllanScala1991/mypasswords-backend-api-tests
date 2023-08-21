@@ -27,7 +27,7 @@ public class Login {
     public void userLoginSuccessfully() throws IOException{
         jsonService.login(username, "123");
         File payload = new File("src/test/resources/payloads/login/login.json");
-        httpClient.post(payload, "/login")
+        httpClient.post(payload, "/login", "")
                 .statusCode(200)
                 .body("data.token", is(notNullValue()));
     }
@@ -36,7 +36,7 @@ public class Login {
     public void sendInvalidUsername() throws IOException{
         jsonService.login("invalid", "123");
         File payload = new File("src/test/resources/payloads/login/login.json");
-        httpClient.post(payload, "/login")
+        httpClient.post(payload, "/login", "")
                 .statusCode(400)
                 .body("message", is("Usuário ou Senha incorretos."));
     }
@@ -45,7 +45,7 @@ public class Login {
     public void sendInvalidPassword() throws IOException{
         jsonService.login(username, "invalid");
         File payload = new File("src/test/resources/payloads/login/login.json");
-        httpClient.post(payload, "/login")
+        httpClient.post(payload, "/login", "")
                 .statusCode(400)
                 .body("message", is("Usuário ou Senha incorretos."));
     }
@@ -54,7 +54,7 @@ public class Login {
     public void sendEmptyUsername() throws IOException{
         jsonService.login("", "123");
         File payload = new File("src/test/resources/payloads/login/login.json");
-        httpClient.post(payload, "/login")
+        httpClient.post(payload, "/login", "")
                 .statusCode(400)
                 .body("message", is("Os campos de Usuário e Senha são obrigatórios."));
     }
@@ -63,7 +63,7 @@ public class Login {
     public void sendEmptyPassword() throws IOException{
         jsonService.login(username, "");
         File payload = new File("src/test/resources/payloads/login/login.json");
-        httpClient.post(payload, "/login")
+        httpClient.post(payload, "/login", "")
                 .statusCode(400)
                 .body("message", is("Os campos de Usuário e Senha são obrigatórios."));
     }

@@ -17,7 +17,7 @@ public class CreateNewUser {
     public void createNewUserSuccessfully() throws IOException{
         jsonService.createUser(faker.generateName(), faker.generateEmail(), faker.generateName());
         File payload = new File("src/test/resources/payloads/user/createUser.json");
-        httpClient.post(payload, "/user")
+        httpClient.post(payload, "/user", "")
                 .statusCode(201)
                 .body("data.id", is(notNullValue()));
     }
@@ -25,7 +25,7 @@ public class CreateNewUser {
     @Test
     public void trySendPayloadEmptyValue() {
         File emptyPayload = new File("src/test/resources/payloads/user/createUserEmpty.json");
-        httpClient.post(emptyPayload, "/user")
+        httpClient.post(emptyPayload, "/user", "")
                 .statusCode(400)
                 .body("message", is("Todos os campos devem ser preenchidos."));
     }
@@ -35,12 +35,12 @@ public class CreateNewUser {
         String username = faker.generateName();
         jsonService.createUser(faker.generateName(), faker.generateEmail(), username);
         File payload = new File("src/test/resources/payloads/user/createUser.json");
-        httpClient.post(payload, "/user")
+        httpClient.post(payload, "/user", "")
                 .statusCode(201);
 
         jsonService.createUser(faker.generateName(), faker.generateEmail(), username);
         File payloadDuplicated = new File("src/test/resources/payloads/user/createUser.json");
-        httpClient.post(payloadDuplicated, "/user")
+        httpClient.post(payloadDuplicated, "/user", "")
                 .statusCode(400)
                 .body("message", is("Já existe um usuário cadastrado com essas informações."));
     }
@@ -50,12 +50,12 @@ public class CreateNewUser {
         String email = faker.generateName() + "@email.com";
         jsonService.createUser(faker.generateName(), email, faker.generateEmail());
         File payload = new File("src/test/resources/payloads/user/createUser.json");
-        httpClient.post(payload, "/user")
+        httpClient.post(payload, "/user", "")
                 .statusCode(201);
 
         jsonService.createUser(faker.generateName(), email, faker.generateEmail());
         File payloadDuplicated = new File("src/test/resources/payloads/user/createUser.json");
-        httpClient.post(payloadDuplicated, "/user")
+        httpClient.post(payloadDuplicated, "/user", "")
                 .statusCode(400)
                 .body("message", is("Já existe um usuário cadastrado com essas informações."));
     }
