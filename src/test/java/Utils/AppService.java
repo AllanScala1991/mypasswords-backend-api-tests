@@ -1,13 +1,6 @@
 package Utils;
-
-import io.restassured.response.ResponseBodyExtractionOptions;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.is;
 
 public class AppService {
     private final JsonService jsonService = new JsonService();
@@ -35,10 +28,9 @@ public class AppService {
                 .statusCode(201);
     }
 
-    public ResponseBodyExtractionOptions getPasswordByUserId(String userId, String token) {
+    public String getProposalTitle(String userId, String token) {
         return httpClient.get("/password/user/" + userId, token)
-                .log().all()
                 .statusCode(200)
-                .extract().path("data[0]");
+                .extract().path("data[0].title");
     }
 }

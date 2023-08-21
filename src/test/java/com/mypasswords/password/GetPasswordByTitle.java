@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class GetAllPasswordsByUserId {
+public class GetPasswordByTitle {
     private static final AppService appService = new AppService();
     private static final FakerService faker = new FakerService();
     private final HttpClient httpClient = new HttpClient();
@@ -23,27 +23,30 @@ public class GetAllPasswordsByUserId {
         userId = appService.createUser(faker.generateName(), faker.generateEmail(), username);
         token = appService.getToken(username, "123");
         appService.createPassword(userId, token);
+        appService.createPassword(userId, token);
     }
 
     @Test
-    public void getAllPasswordsByUserId() throws IOException {
-        httpClient.get("/password/user/" + userId, token)
+    public void getPasswordByTitle() {
+        String proposalTitle = appService.getProposalTitle(userId, token);
+
+        httpClient.get("/password/" + proposalTitle, token)
                 .statusCode(200)
-                .body("data.size()", is(greaterThan(0)));
+                .body("data[0].title", is(proposalTitle));
     }
 
     @Test
-    public void sendInvalidUserId() throws IOException {
-        httpClient.get("/password/user/invalid", token)
-                .log().all()
+    public void sendInvalidProposalTitle() {
+        httpClient.get("/password/invalid", token)
                 .statusCode(404)
                 .body("message", is("Nenhum registro localizado."));
     }
 
     @Test
-    public void sendInvalidToken() throws IOException {
-        httpClient.get("/password/user/" + userId, "invalid")
-                .log().all()
+    public void sendInvalidToken() {
+        String proposalTitle = appService.getProposalTitle(userId, token);
+
+        httpClient.get("/password/" + proposalTitle, "invalid")
                 .statusCode(403);
     }
 }
