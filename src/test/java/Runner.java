@@ -1,8 +1,5 @@
 import com.mypasswords.login.Login;
-import com.mypasswords.password.CreateNewPassword;
-import com.mypasswords.password.GetAllPasswordsByUserId;
-import com.mypasswords.password.GetPasswordByTitle;
-import com.mypasswords.password.UpdatePasswordById;
+import com.mypasswords.password.*;
 import com.mypasswords.user.CreateNewUser;
 import com.mypasswords.user.DeleteUser;
 import com.mypasswords.user.UpdateUser;
@@ -18,7 +15,9 @@ import org.junit.runners.Suite;
    CreateNewPassword.class,
    GetAllPasswordsByUserId.class,
    GetPasswordByTitle.class,
-   UpdatePasswordById.class
+   UpdatePasswordById.class,
+   DeletePasswordById.class,
+   ShowPassword.class
 })
 public class Runner {
 }
