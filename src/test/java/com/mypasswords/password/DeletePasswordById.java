@@ -3,8 +3,6 @@ package com.mypasswords.password;
 import Utils.AppService;
 import Utils.FakerService;
 import Utils.HttpClient;
-import Utils.JsonService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.hamcrest.Matchers.*;
@@ -15,8 +13,6 @@ public class DeletePasswordById {
     private static final AppService appService = new AppService();
     private static final FakerService faker = new FakerService();
     private final HttpClient httpClient = new HttpClient();
-    private JsonService jsonService = new JsonService();
-    private final ObjectMapper objectMapper = new ObjectMapper();
     private static String userId;
     private static String token;
     private static String username;
